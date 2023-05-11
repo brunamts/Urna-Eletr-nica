@@ -13,7 +13,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
+import Componentes.TextField;
 /**
  *
  * @author letic
@@ -46,8 +46,8 @@ public class TelaAddUsuario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nomeRecebido = new javax.swing.JTextField();
-        userRecebido = new javax.swing.JTextField();
+        nomeRecebido = new TextField();
+        userRecebido = new TextField();
         botaoAutenticar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -153,7 +153,10 @@ public class TelaAddUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_nomeRecebidoActionPerformed
 
     private void botaoAutenticarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAutenticarActionPerformed
- 
+        if (nomeRecebido.isEmpty() || userRecebido.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos.");
+        return;
+        }
         var valido = this.manager.isValid(this.nomeRecebido.getText(), this.userRecebido.getText());
         if (!valido){
             Component frame = null;
@@ -214,7 +217,7 @@ public class TelaAddUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField nomeRecebido;
-    private javax.swing.JTextField userRecebido;
+    private TextField nomeRecebido;
+    private TextField userRecebido;
     // End of variables declaration//GEN-END:variables
 }

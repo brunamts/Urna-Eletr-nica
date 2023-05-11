@@ -30,12 +30,13 @@ public class TelaVotar extends javax.swing.JFrame {
         this.manager = manager;
         initComponents();
     }
-    
+
     public TelaVotar(Manager manager, TelaMenu telaMenu) {
         this.manager = manager;
         this.telaMenu = telaMenu;
         initComponents();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,26 +204,32 @@ public class TelaVotar extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoDBZActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        if(botaoKimetsu.isSelected()){
-            
+        Component frame = null;
+        if (!botaoKimetsu.isSelected() && !botaoSKN.isSelected() && !botaoDBZ.isSelected() && !botaoOnePiece.isSelected()) {
+            JOptionPane.showMessageDialog(frame, "Selecione uma das opções.");
+            return;
         }
-        if(botaoSKN.isSelected()){
-            
+
+        for (Candidato candidato : this.manager.getCandidato()) {
+            if (botaoKimetsu.isSelected() && candidato.getId() == 0001) {
+                candidato.adicionarVoto();
+            }
+            if (botaoSKN.isSelected() && candidato.getId() == 0010) {
+                candidato.adicionarVoto();
+            }
+            if (botaoDBZ.isSelected() && candidato.getId() == 0011) {
+                candidato.adicionarVoto();
+            }
+            if (botaoOnePiece.isSelected() && candidato.getId() == 0100) {
+                candidato.adicionarVoto();
+            }
         }
-        if(botaoDBZ.isSelected()){
-        
-        }
-        if(botaoOnePiece.isSelected()){
-        
-        }
-        if (botaoKimetsu.isSelected() || botaoSKN.isSelected() || botaoDBZ.isSelected() || botaoOnePiece.isSelected()){
-            Component frame = null;
-            JOptionPane.showMessageDialog(frame, "Voto Computado!");
-            this.telaMenu.setVisible(true);
-            this.setVisible(false);    
-        }
-        
+
+        JOptionPane.showMessageDialog(frame, "Voto Computado!");
+        this.telaMenu.setVisible(true);
+        this.setVisible(false);
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

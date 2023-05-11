@@ -31,4 +31,27 @@ public class Manager {
     public boolean isValid(String nome, String user){
         return this.auth.autenticar(nome, user);
     }
+
+    public List<Candidato> getCandidato(){
+        return this.candidatos;
+    }
+    
+    public Candidato getVencedor(){
+        Candidato candidatoMaisVotado = new Candidato(0, "");
+        int maiorQuantidadeVotos = 0;
+
+        // Itera sobre a lista de candidatos
+        for (Candidato candidato : candidatos) {
+            int quantidadeVotos = candidato.getVotos();
+
+            // Verifica se a quantidade de votos do candidato atual é maior que a maior quantidade de votos encontrada até agora
+            if (quantidadeVotos > maiorQuantidadeVotos) {
+                maiorQuantidadeVotos = quantidadeVotos;
+                candidatoMaisVotado.setId(candidato.getId());
+                candidatoMaisVotado.setNome(candidato.getNome());
+                candidatoMaisVotado.setVotos(candidato.getVotos());
+            }
+        }
+        return candidatoMaisVotado;
+    }
 }

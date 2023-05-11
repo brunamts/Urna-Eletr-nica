@@ -9,5 +9,7 @@ package Componentes;
  * @author bruna
  */
 public class TextField extends javax.swing.JTextField{
-
+    public boolean isEmpty(){
+        return this.getText().isEmpty();
+    }
 }
