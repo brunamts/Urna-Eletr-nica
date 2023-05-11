@@ -7,36 +7,28 @@ package Controller;
 import Model.Candidato;
 import Model.Eleitor;
 import java.util.List;
-
-/**
- *
+import Controller.Autenticacao;
+import Controller.Auth;
+ 
+ /*
  * @author letic
  */
 public class Manager {
     private List<Candidato> candidatos;
     private List<Eleitor> eleitores;
-
-    public Manager(List<Candidato> candidatos, List<Eleitor> eleitores) {
+    private Auth auth;
+    
+    public Manager(
+            List<Candidato> candidatos,
+            List<Eleitor> eleitores,
+            Auth auth
+    ) {
         this.candidatos = candidatos;
         this.eleitores = eleitores;
+        this.auth = auth;
     }
 
-    public List<Candidato> getCandidatos() {
-        return candidatos;
+    public boolean isValid(String nome, String user){
+        return this.auth.autenticar(nome, user);
     }
-
-    public void setCandidatos(List<Candidato> candidatos) {
-        this.candidatos = candidatos;
-    }
-
-    public List<Eleitor> getEleitores() {
-        return eleitores;
-    }
-
-    public void setEleitores(List<Eleitor> eleitores) {
-        this.eleitores = eleitores;
-    }
-    
-    
-    
 }
