@@ -9,8 +9,10 @@ import Controller.Auth;
 import Controller.Manager;
 import Model.Candidato;
 import Model.Eleitor;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,7 +48,7 @@ public class TelaAddUsuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nomeRecebido = new javax.swing.JTextField();
         userRecebido = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        botaoAutenticar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
@@ -55,6 +57,7 @@ public class TelaAddUsuario extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(66, 18, 114));
+        jPanel1.setPreferredSize(new java.awt.Dimension(550, 450));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(205, 175, 235));
@@ -74,13 +77,13 @@ public class TelaAddUsuario extends javax.swing.JFrame {
         userRecebido.setForeground(new java.awt.Color(255, 255, 255));
         userRecebido.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton1.setBackground(new java.awt.Color(28, 2, 55));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Autenticar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoAutenticar.setBackground(new java.awt.Color(28, 2, 55));
+        botaoAutenticar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        botaoAutenticar.setForeground(new java.awt.Color(255, 255, 255));
+        botaoAutenticar.setText("Autenticar");
+        botaoAutenticar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoAutenticarActionPerformed(evt);
             }
         });
 
@@ -110,8 +113,8 @@ public class TelaAddUsuario extends javax.swing.JFrame {
                             .addComponent(userRecebido)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(203, 203, 203)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(169, Short.MAX_VALUE))
+                        .addComponent(botaoAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +130,7 @@ public class TelaAddUsuario extends javax.swing.JFrame {
                     .addComponent(userRecebido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(46, 46, 46)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoAutenticar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(77, Short.MAX_VALUE))
         );
 
@@ -135,11 +138,11 @@ public class TelaAddUsuario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -149,14 +152,22 @@ public class TelaAddUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomeRecebidoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoAutenticarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAutenticarActionPerformed
+ 
         var valido = this.manager.isValid(this.nomeRecebido.getText(), this.userRecebido.getText());
-        if (valido){
-            TelaVotar votar = new TelaVotar(this.manager, this.telaMenu);
+        if (!valido){
+            Component frame = null;
+            JOptionPane.showMessageDialog(frame, "Voce ja votou.");
+            this.telaMenu.setVisible(true);
+            this.setVisible(false);
+            return;
+        }
+         TelaVotar votar = new TelaVotar(this.manager, this.telaMenu);
             votar.setVisible(true);
             this.setVisible(false);
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+            return;
+            
+    }//GEN-LAST:event_botaoAutenticarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,7 +209,7 @@ public class TelaAddUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botaoAutenticar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -7,8 +7,10 @@ package View;
 import Controller.Manager;
 import Model.Candidato;
 import Model.Eleitor;
+import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,12 +22,8 @@ public class TelaMenu extends javax.swing.JFrame {
         this.manager = manager;
         initComponents();
     }
-    
-    /*public TelaMenu(Manager manager, TelaPrincipal telaPrincipal) {       
-        this.manager = manager;
-        this.telaPrincipal = telaPrincipal;
-        initComponents();
-    }
+
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,9 +36,9 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botaoVotar = new javax.swing.JButton();
+        botaoFinalizar = new javax.swing.JButton();
+        botaoResultado = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -55,27 +53,32 @@ public class TelaMenu extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rubik.png"))); // NOI18N
         jLabel1.setText("Menu Geek");
 
-        jButton1.setBackground(new java.awt.Color(28, 2, 55));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Votar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoVotar.setBackground(new java.awt.Color(28, 2, 55));
+        botaoVotar.setForeground(new java.awt.Color(255, 255, 255));
+        botaoVotar.setText("Votar");
+        botaoVotar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoVotarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(28, 2, 55));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Finalizar Votacao");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botaoFinalizar.setBackground(new java.awt.Color(28, 2, 55));
+        botaoFinalizar.setForeground(new java.awt.Color(255, 255, 255));
+        botaoFinalizar.setText("Finalizar Votacao");
+        botaoFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botaoFinalizarActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(28, 2, 55));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Mostrar Resultado");
+        botaoResultado.setBackground(new java.awt.Color(28, 2, 55));
+        botaoResultado.setForeground(new java.awt.Color(255, 255, 255));
+        botaoResultado.setText("Mostrar Resultado");
+        botaoResultado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoResultadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,10 +88,10 @@ public class TelaMenu extends javax.swing.JFrame {
                 .addGap(189, 189, 189)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(198, Short.MAX_VALUE))
+                    .addComponent(botaoVotar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,11 +99,11 @@ public class TelaMenu extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoVotar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botaoResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(152, Short.MAX_VALUE))
         );
 
@@ -108,25 +111,34 @@ public class TelaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoVotarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVotarActionPerformed
         TelaAddUsuario tela = new TelaAddUsuario(manager, this);
         tela.setVisible(true);
         this.setVisible(false);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoVotarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void botaoFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFinalizarActionPerformed
+        this.botaoVotar.setEnabled(false);
+        Component frame = null;
+        JOptionPane.showMessageDialog(frame, "A votação foi finalizada.");
+        // jogar dados em memoria pros arquivos
+    }//GEN-LAST:event_botaoFinalizarActionPerformed
+
+    private void botaoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoResultadoActionPerformed
+        TelaVencedor vencedor = new TelaVencedor(manager, this);
+        vencedor.setVisible(true);
+        this.setVisible(false); // TODO add your handling code here:// TODO add your handling code here:
+    }//GEN-LAST:event_botaoResultadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,9 +146,9 @@ public class TelaMenu extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton botaoFinalizar;
+    private javax.swing.JButton botaoResultado;
+    private javax.swing.JButton botaoVotar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;

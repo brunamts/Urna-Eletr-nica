@@ -26,6 +26,7 @@ public class Autenticacao implements Auth{
        }
         Eleitor eleitor = new Eleitor(nome, user);
         this.eleitores.add(eleitor);
+        System.out.println(this.eleitores);
         return true;
    }
    
