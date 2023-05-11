@@ -3,6 +3,8 @@
  */
 package Main;
 
+import Controller.Autenticacao;
+import Controller.Auth;
 import Controller.Manager;
 import Model.Candidato;
 import Model.Eleitor;
@@ -22,8 +24,8 @@ public class App {
         candidatos.add(candidato2);
         candidatos.add(candidato3);
         candidatos.add(candidato4);
-        
-        Manager manager = new Manager(candidatos, eleitores);
+        Auth auth = new Autenticacao(eleitores);
+        Manager manager = new Manager(candidatos, eleitores, auth);
         
         
         TelaMenu telaMenu = new TelaMenu(manager);
