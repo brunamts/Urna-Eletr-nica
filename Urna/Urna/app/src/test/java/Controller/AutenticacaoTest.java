@@ -4,6 +4,9 @@
  */
 package Controller;
 
+import Model.Eleitor;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,17 +42,18 @@ public class AutenticacaoTest {
     /**
      * Test of autenticar method, of class Autenticacao.
      */
-    @Test
+  @Test
     public void testAutenticar() {
-        System.out.println("autenticar");
-        String nome = "";
-        String user = "";
-        Autenticacao instance = null;
-        boolean expResult = false;
-        boolean result = instance.autenticar(nome, user);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Eleitor> eleitores;
+        eleitores = new ArrayList<>();
+        Autenticacao autenticacao = new Autenticacao(eleitores);
+
+        String nome = "Anderson";
+        String user = "anderson123";
+        boolean resultado = autenticacao.autenticar(nome, user);
+
+        assertEquals(true, resultado);
+        assertEquals(true, autenticacao.validar(nome, user));
     }
 
     /**
@@ -57,15 +61,17 @@ public class AutenticacaoTest {
      */
     @Test
     public void testValidar() {
-        System.out.println("validar");
-        String nome = "";
-        String user = "";
-        Autenticacao instance = null;
-        boolean expResult = false;
-        boolean result = instance.validar(nome, user);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Eleitor> eleitores;
+        eleitores = new ArrayList<>();
+        eleitores.add(new Eleitor("Eric", "eric123"));
+        eleitores.add(new Eleitor("Stella", "stella456"));
+        eleitores.add(new Eleitor("Fernanda", "fernanda789"));
+
+        Autenticacao autenticacao = new Autenticacao(eleitores);
+
+        assertEquals(true, autenticacao.validar("Stella", "stella456"));
+ 
+        assertEquals(false, autenticacao.validar("Matheus", "matheus000"));
     }
     
 }
