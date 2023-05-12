@@ -4,8 +4,13 @@
  */
 package Controller;
 
+import Model.Candidato;
+import Model.Eleitor;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,34 +18,60 @@ import java.io.FileReader;
  */
 public class CarregarListas implements LoadList {
 
-    public CarregarListas() {
-        
+    public CarregarListas() {  
     }
     
-    public void carregarTxtEleitores(){
-        
-       /* try{
+    @Override
+    public List<Eleitor> carregarTxtEleitores(){
+       List<Eleitor> eleitores = new ArrayList(); 
+       try{
             FileReader arquivo = new FileReader("eleitores.txt");
             BufferedReader lerArquivo = new BufferedReader(arquivo);
             
             String linha = lerArquivo.readLine();
-            
-            While (linha != null) {
-                Objeto
+            while (linha != null) {
+                String [] objeto = linha.split(",");
+                String nome = objeto[0];
+                String user = objeto[1];
+                int idCandidato = Integer.parseInt(objeto[2]);
                 
                 
+                Eleitor eleitor = new Eleitor(nome, user, idCandidato);
+                eleitores.add(eleitor); 
                 
             }
             
-        } catch (){
+        } catch (IOException e){
+            System.out.println("Erro ao ler arquivo" + e.getMessage());   
         }
-    
-        
-    
-    
+       return eleitores;
+       
     }
     
+        @Override
+        public List<Candidato> carregarTxtCandidatos(){
+        List<Candidato> candidatos = new ArrayList();
+        try{
+            FileReader arquivo = new FileReader("candidatos.txt");
+            BufferedReader lerArquivo = new BufferedReader(arquivo);
+            
+            String linha = lerArquivo.readLine();
+            while (linha != null) {
+                String [] objeto = linha.split(",");
+                int id = Integer.parseInt(objeto[0]);
+                String nome = objeto [1];
+                int votos = Integer.parseInt(objeto[2]);
+                
+                
+                
+                Candidato candidato = new Candidato(id, nome, votos);
+                candidatos.add(candidato);
+ 
+            }
+        } catch (IOException e){
+            System.out.println("Erro ao ler arquivo" + e.getMessage());   
+        }
+        return candidatos;
+    }
     
-*/    
-}
 }

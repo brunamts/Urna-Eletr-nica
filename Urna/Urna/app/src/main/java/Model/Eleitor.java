@@ -11,11 +11,26 @@ package Model;
 public class Eleitor {
     private String nome;
     private String user;
+    private int idCandidato;
 
     public Eleitor(String nome, String user) {
         this.nome = nome;
         this.user = user;
     }
+
+    public Eleitor(String nome, String user, int idCandidato) {
+        this.nome = nome;
+        this.user = user;
+        this.idCandidato = idCandidato;
+    }
+
+    public int getIdCandidato() {
+        return idCandidato;
+    }
+
+    public void setIdCandidato(int idCandidato) {
+        this.idCandidato = idCandidato;
+    }   
 
     public String getNome() {
         return nome;

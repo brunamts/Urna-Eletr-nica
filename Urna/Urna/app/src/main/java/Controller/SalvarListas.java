@@ -32,7 +32,7 @@ public class SalvarListas implements SaveList {
             
             for (Eleitor e : eleitores){
                 //nome user
-                gravarArquivo.println(e.getNome()+" "+e.getUser());
+                gravarArquivo.println(e.getNome()+","+e.getUser()+","+e.getIdCandidato());
             }
         } catch (IOException e) {
           System.out.println("Erro ao gravar lista no arquivo" + e.getMessage());  
@@ -47,14 +47,20 @@ public class SalvarListas implements SaveList {
             FileWriter arquivo = new FileWriter("candidatos.txt");
             PrintWriter gravarArquivo = new PrintWriter(arquivo);
             
-            for (Candidato c : candidatos){
+           
+            for (Candidato c : this.candidatos){
                 //id nome votos
-                gravarArquivo.println(c.getId()+" "+c.getNome()+" "+c.getVotos());
+                
+                String txt = c.getId()+","+c.getNome()+","+c.getVotos();
+                gravarArquivo.println(txt);       
             }
+            gravarArquivo.close();
+            
         } catch (IOException e) {
           System.out.println("Erro ao gravar lista no arquivo" + e.getMessage());  
         }
     }
+    
        
 }
     

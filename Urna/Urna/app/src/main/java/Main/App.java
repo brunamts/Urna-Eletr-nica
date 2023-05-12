@@ -4,7 +4,8 @@
 package Main;
 
 import Controller.Autenticacao;
-import Controller.Auth;
+import Controller.CarregarListas;
+import Controller.LoadList;
 import Controller.Manager;
 import Model.Candidato;
 import Model.Eleitor;
@@ -24,12 +25,15 @@ public class App {
         candidatos.add(candidato2);
         candidatos.add(candidato3);
         candidatos.add(candidato4);
-        Auth auth = new Autenticacao(eleitores);
+        Autenticacao auth = new Autenticacao(eleitores);
         Manager manager = new Manager(candidatos, eleitores, auth);
         
+        LoadList carregarCandidato = new CarregarListas();
+        System.out.println(carregarCandidato.carregarTxtCandidatos());
+
         
-        TelaMenu telaMenu = new TelaMenu(manager);
-        telaMenu.setVisible(true);
+        //TelaMenu telaMenu = new TelaMenu(manager);
+        //telaMenu.setVisible(true);
         //telaMenu.setManager(manager);
         
     }

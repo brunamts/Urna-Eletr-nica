@@ -4,10 +4,16 @@
  */
 package Controller;
 
+import Model.Candidato;
+import Model.Eleitor;
+import java.util.List;
+
 /**
  *
  * @author letic
  */
 public interface LoadList {
-    
+    public List<Eleitor> carregarTxtEleitores();
+    public List<Candidato> carregarTxtCandidatos();
+   
 }

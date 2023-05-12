@@ -11,11 +11,19 @@ package Model;
 public abstract class Participantes {
     private int id;
     private String nome;
+    private int votos;
+
+    public Participantes(int id, String nome, int votos) {
+        this.id = id;
+        this.nome = nome;
+        this.votos = votos;
+    }
 
     public Participantes(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
+    
 
     public int getId() {
         return id;

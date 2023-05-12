@@ -11,12 +11,24 @@ package Model;
 public class Candidato extends Participantes {
     private int id;
     private String nome;
-    private int votos = 0;
+    private int votos;
+
+    
+    public Candidato(int id, String nome, int votos) {
+        super(id, nome, votos);
+        this.id = id;
+        this.nome = nome;
+        this.votos = votos;
+              
+    }
 
     public Candidato(int id, String nome) {
         super(id, nome);
-    }
-
+        this.id = id;
+        this.nome = nome;
+        this.votos = 0;
+    }   
+    
     public int getId() {
         return id;
     }
@@ -44,6 +56,11 @@ public class Candidato extends Participantes {
     @Override
     public void adicionarVoto() {
        votos++;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidato{" + "id=" + id + ", nome=" + nome + ", votos=" + votos + '}';
     }
     
 }
