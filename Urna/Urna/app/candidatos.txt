@@ -1,4 +1,4 @@
-1,Kimetsu no Yaba,0
-2,Dragon Ball Z,0
-3,Shingeki no Kyojin,0
-4,One Piece,0
+1,Kimetsu no Yaba,2,1d88b3023c5ff2cb017a59712e07c5bf1ed68242c573ef3c5cf8060cb4792a3a
+2,Dragon Ball Z,3,74880ecf583e244599d2dbaa7b127b61a523a83fadf941402149d98e6b27e265
+3,Shingeki no Kyojin,2,0e7e09ac36f7443ae71eee322f5ab3cf93c57adfb19c730822a0e6e2f08c2b98
+4,One Piece,5,64b109c87b90ebb6827b57f69489a295d0978c54fbcffb039ab84524b4465e1a

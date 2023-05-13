@@ -54,4 +54,9 @@ public class Manager {
         }
         return candidatoMaisVotado;
     }
+    
+    public Eleitor lastEleitor(){
+        int i = this.eleitores.size()-1;
+        return this.eleitores.get(i);
+    }
 }

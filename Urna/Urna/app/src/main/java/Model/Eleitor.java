@@ -18,12 +18,11 @@ public class Eleitor {
         this.user = user;
     }
 
-    public Eleitor(String nome, String user, int idCandidato) {
-        this.nome = nome;
+    public Eleitor(String user, int idCandidato) {
         this.user = user;
         this.idCandidato = idCandidato;
     }
-
+    
     public int getIdCandidato() {
         return idCandidato;
     }

@@ -9,6 +9,9 @@ import Model.Eleitor;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,60 +21,77 @@ import java.util.List;
  */
 public class CarregarListas implements LoadList {
 
-    public CarregarListas() {  
+    public CarregarListas() {
     }
-    
+
     @Override
-    public List<Eleitor> carregarTxtEleitores(){
-       List<Eleitor> eleitores = new ArrayList(); 
-       try{
-            FileReader arquivo = new FileReader("eleitores.txt");
-            BufferedReader lerArquivo = new BufferedReader(arquivo);
-            
-            String linha = lerArquivo.readLine();
-            while (linha != null) {
-                String [] objeto = linha.split(",");
+    public List<Eleitor> carregarTxtEleitores() {
+        List<Eleitor> eleitores = new ArrayList();
+        try {
+            Path path = Paths.get("eleitores.txt");
+            List<String> linhasArquivo = Files.readAllLines(path);
+
+            for (String linha : linhasArquivo) {
+                String[] objeto = linha.split(",");
                 String nome = objeto[0];
                 String user = objeto[1];
-                int idCandidato = Integer.parseInt(objeto[2]);
-                
-                
-                Eleitor eleitor = new Eleitor(nome, user, idCandidato);
-                eleitores.add(eleitor); 
-                
+
+                Eleitor eleitor = new Eleitor(nome, user);
+                eleitores.add(eleitor);
             }
-            
-        } catch (IOException e){
-            System.out.println("Erro ao ler arquivo" + e.getMessage());   
+
+        } catch (IOException e) {
+            System.out.println("Erro ao ler arquivo" + e.getMessage());
         }
-       return eleitores;
-       
+        return eleitores;
+
     }
-    
-        @Override
-        public List<Candidato> carregarTxtCandidatos(){
+
+    @Override
+    public List<Candidato> carregarTxtCandidatos() {
         List<Candidato> candidatos = new ArrayList();
-        try{
-            FileReader arquivo = new FileReader("candidatos.txt");
-            BufferedReader lerArquivo = new BufferedReader(arquivo);
-            
-            String linha = lerArquivo.readLine();
-            while (linha != null) {
-                String [] objeto = linha.split(",");
+        try {
+     
+            Path path = Paths.get("candidatos.txt");
+            List<String> linhasArquivo = Files.readAllLines(path);
+
+            for (String linha : linhasArquivo) {
+                String[] objeto = linha.split(",");
                 int id = Integer.parseInt(objeto[0]);
-                String nome = objeto [1];
+                String nome = objeto[1];
                 int votos = Integer.parseInt(objeto[2]);
-                
-                
-                
+
                 Candidato candidato = new Candidato(id, nome, votos);
                 candidatos.add(candidato);
- 
+
             }
-        } catch (IOException e){
-            System.out.println("Erro ao ler arquivo" + e.getMessage());   
+            
+        } catch (IOException e) {
+            System.out.println("Erro ao ler arquivo" + e.getMessage());
         }
         return candidatos;
     }
-    
+
+     @Override
+    public List<Eleitor> carregarTxtVotos() {
+        List<Eleitor> eleitores = new ArrayList();
+        try {
+            Path path = Paths.get("votos.txt");
+            List<String> linhasArquivo = Files.readAllLines(path);
+
+            for (String linha : linhasArquivo) {
+                String[] objeto = linha.split(",");
+                String user = objeto[0];
+                int voto = Integer.parseInt(objeto[1]);
+
+                Eleitor eleitor = new Eleitor(user, voto);
+                eleitores.add(eleitor);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erro ao ler arquivo" + e.getMessage());
+        }
+        return eleitores;
+
+    }
 }

@@ -6,11 +6,8 @@ package Controller;
 
 /**
  *
- * @author letic
+ * @author bruna
  */
-public interface SaveList {
-    public void subirTxtEleitores();
-    public void subirTxtCandidatos();
-    public void subirTxtVotos();
-    public void subirTxtArquivos();
+public interface IManager {
+    
 }

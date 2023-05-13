@@ -205,23 +205,29 @@ public class TelaVotar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Component frame = null;
+        Eleitor eleitor = this.manager.lastEleitor();
+        
         if (!botaoKimetsu.isSelected() && !botaoSKN.isSelected() && !botaoDBZ.isSelected() && !botaoOnePiece.isSelected()) {
             JOptionPane.showMessageDialog(frame, "Selecione uma das opções.");
             return;
         }
 
         for (Candidato candidato : this.manager.getCandidato()) {
-            if (botaoKimetsu.isSelected() && candidato.getId() == 0001) {
+            if (botaoKimetsu.isSelected() && candidato.getId() == 1) {
                 candidato.adicionarVoto();
+                eleitor.setIdCandidato(1);
             }
-            if (botaoSKN.isSelected() && candidato.getId() == 0010) {
+            if (botaoSKN.isSelected() && candidato.getId() == 2) {
                 candidato.adicionarVoto();
+                eleitor.setIdCandidato(2);
             }
-            if (botaoDBZ.isSelected() && candidato.getId() == 0011) {
+            if (botaoDBZ.isSelected() && candidato.getId() == 3) {
                 candidato.adicionarVoto();
+                eleitor.setIdCandidato(3);
             }
-            if (botaoOnePiece.isSelected() && candidato.getId() == 0100) {
+            if (botaoOnePiece.isSelected() && candidato.getId() == 4) {
                 candidato.adicionarVoto();
+                eleitor.setIdCandidato(4);
             }
         }
 

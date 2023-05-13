@@ -5,6 +5,7 @@
 package View;
 
 import Controller.Manager;
+import Controller.SaveList;
 import Model.Candidato;
 import Model.Eleitor;
 import java.awt.Component;
@@ -17,12 +18,18 @@ import javax.swing.JOptionPane;
  * @author letic
  */
 public class TelaMenu extends javax.swing.JFrame {
+
+    private SaveList savelist;
     
     public TelaMenu(Manager manager) {       
         this.manager = manager;
         initComponents();
     }
-
+    public TelaMenu(Manager manager, SaveList savelist) {       
+        this.manager = manager;
+        this.savelist = savelist;
+        initComponents();
+    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -131,7 +138,10 @@ public class TelaMenu extends javax.swing.JFrame {
         this.botaoVotar.setEnabled(false);
         Component frame = null;
         JOptionPane.showMessageDialog(frame, "A votação foi finalizada.");
-        // jogar dados em memoria pros arquivos
+        this.savelist.subirTxtCandidatos();
+        this.savelist.subirTxtEleitores();
+        this.savelist.subirTxtVotos();
+        this.savelist.subirTxtArquivos();
     }//GEN-LAST:event_botaoFinalizarActionPerformed
 
     private void botaoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoResultadoActionPerformed

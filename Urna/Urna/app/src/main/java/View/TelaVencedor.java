@@ -4,15 +4,8 @@
  */
 package View;
 
-import Controller.Autenticacao;
-import Controller.Auth;
 import Controller.Manager;
 import Model.Candidato;
-import Model.Eleitor;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -24,14 +17,17 @@ public class TelaVencedor extends javax.swing.JFrame {
     private TelaMenu telaMenu;
 
     /**
-     * Creates new form Vencedor
+     * Creates new form TelaVencedor
      */
-   
+   public TelaVencedor() {
+        initComponents();
+    }
+    
     public TelaVencedor(Manager manager) {
         this.manager = manager;
         initComponents();
     }
-    
+
     public TelaVencedor(Manager manager, TelaMenu telaMenu) {
         this.manager = manager;
         this.telaMenu = telaMenu;
@@ -41,8 +37,7 @@ public class TelaVencedor extends javax.swing.JFrame {
         System.out.println(nomeVencedor);
         System.out.println(votosString);
         this.nomeVencedor.setText(vencedor.getNome());
-        this.qtdvotos.setText(votosString);
-        
+        this.qtdVotos.setText(votosString);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,60 +49,76 @@ public class TelaVencedor extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        titulo = new javax.swing.JLabel();
         nomeVencedor = new javax.swing.JLabel();
-        qtdvotos = new javax.swing.JLabel();
+        qtdVotos = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(66, 18, 114));
-        jPanel1.setToolTipText("");
+        jPanel1.setPreferredSize(new java.awt.Dimension(550, 450));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(205, 175, 235));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rubik.png"))); // NOI18N
-        jLabel1.setText("Resultado da Votação");
+        titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        titulo.setForeground(new java.awt.Color(205, 175, 235));
+        titulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/rubik.png"))); // NOI18N
+        titulo.setText("Resultado da Votacao");
+        titulo.setToolTipText("");
 
-        nomeVencedor.setForeground(new java.awt.Color(255, 255, 255));
+        nomeVencedor.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        nomeVencedor.setForeground(new java.awt.Color(205, 175, 235));
         nomeVencedor.setText("VENCEDOR");
-        nomeVencedor.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                nomeVencedorAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
 
-        qtdvotos.setForeground(new java.awt.Color(255, 255, 255));
-        qtdvotos.setText("QTD VOTOs");
+        qtdVotos.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        qtdVotos.setForeground(new java.awt.Color(205, 175, 235));
+        qtdVotos.setText("QTD VOTOS");
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(205, 175, 235));
+        jLabel1.setText("Votos:");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(205, 175, 235));
+        jLabel2.setText("Vencedor:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(145, 145, 145))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(nomeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addComponent(qtdvotos)
-                .addGap(122, 122, 122))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(titulo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomeVencedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(qtdVotos))
+                        .addGap(47, 47, 47)))
+                .addGap(129, 129, 129))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(107, 107, 107)
+                .addGap(53, 53, 53)
+                .addComponent(titulo)
+                .addGap(84, 84, 84)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(qtdvotos))
-                .addContainerGap(185, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(qtdVotos))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,10 +138,6 @@ public class TelaVencedor extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nomeVencedorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_nomeVencedorAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeVencedorAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -158,23 +165,21 @@ public class TelaVencedor extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaVencedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        List<Candidato> candidatos = new ArrayList();
-        List<Eleitor> eleitores = new ArrayList();
-        Auth auth = new Autenticacao(eleitores);
-        Manager manager = new Manager(candidatos, eleitores, auth);
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaVencedor(manager).setVisible(true);
+                new TelaVencedor().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel nomeVencedor;
-    private javax.swing.JLabel qtdvotos;
+    private javax.swing.JLabel qtdVotos;
+    private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

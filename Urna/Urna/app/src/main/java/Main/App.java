@@ -7,6 +7,8 @@ import Controller.Autenticacao;
 import Controller.CarregarListas;
 import Controller.LoadList;
 import Controller.Manager;
+import Controller.SalvarListas;
+import Controller.SaveList;
 import Model.Candidato;
 import Model.Eleitor;
 import View.TelaMenu;
@@ -15,26 +17,17 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args) {
-        List<Candidato> candidatos = new ArrayList();
-        List<Eleitor> eleitores = new ArrayList();
-        Candidato candidato1 = new Candidato(0001, "Kimetsu no Yaba");
-        Candidato candidato2 = new Candidato(0010, "Dragon Ball Z"); 
-        Candidato candidato3 = new Candidato(0011, "Shingeki no Kyojin");
-        Candidato candidato4 = new Candidato(0100, "One Piece");
-        candidatos.add(candidato1);
-        candidatos.add(candidato2);
-        candidatos.add(candidato3);
-        candidatos.add(candidato4);
+        LoadList carregar = new CarregarListas();
+        List<Candidato> candidatos = carregar.carregarTxtCandidatos();
+        List<Eleitor> eleitores = carregar.carregarTxtEleitores();
+       
         Autenticacao auth = new Autenticacao(eleitores);
         Manager manager = new Manager(candidatos, eleitores, auth);
+        SaveList savelist = new SalvarListas(eleitores, candidatos);
         
-        LoadList carregarCandidato = new CarregarListas();
-        System.out.println(carregarCandidato.carregarTxtCandidatos());
-
-        
-        //TelaMenu telaMenu = new TelaMenu(manager);
-        //telaMenu.setVisible(true);
-        //telaMenu.setManager(manager);
+        TelaMenu telaMenu = new TelaMenu(manager, savelist);
+        telaMenu.setVisible(true);
+       
         
     }
 }

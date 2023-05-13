@@ -15,5 +15,5 @@ import java.util.List;
 public interface LoadList {
     public List<Eleitor> carregarTxtEleitores();
     public List<Candidato> carregarTxtCandidatos();
-   
+    public List<Eleitor> carregarTxtVotos();
 }
