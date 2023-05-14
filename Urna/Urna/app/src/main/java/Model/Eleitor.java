@@ -12,21 +12,36 @@ public class Eleitor {
     private String nome;
     private String user;
     private int idCandidato;
+    private String hash;   
 
     public Eleitor(String nome, String user) {
         this.nome = nome;
         this.user = user;
     }
 
-    public Eleitor(String user, int idCandidato) {
+    public Eleitor(String user, int idCandidato, String hash) {
         this.user = user;
         this.idCandidato = idCandidato;
+        this.hash = hash;
+    }
+    public Eleitor(String nome, String user , String hash) {
+        this.nome = nome;
+        this.user = user;
+        this.hash = hash;
     }
     
     public int getIdCandidato() {
         return idCandidato;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+    
     public void setIdCandidato(int idCandidato) {
         this.idCandidato = idCandidato;
     }   

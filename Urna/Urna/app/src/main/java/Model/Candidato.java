@@ -9,17 +9,25 @@ package Model;
  * @author letic
  */
 public class Candidato extends Participantes {
+
     private int id;
     private String nome;
     private int votos;
+    private String hash;
 
-    
     public Candidato(int id, String nome, int votos) {
         super(id, nome, votos);
         this.id = id;
         this.nome = nome;
         this.votos = votos;
-              
+
+    }
+
+    public Candidato(int id, String nome, String hash) {
+        super(id, nome);
+        this.id = id;
+        this.nome = nome;
+        this.hash = hash;
     }
 
     public Candidato(int id, String nome) {
@@ -27,8 +35,16 @@ public class Candidato extends Participantes {
         this.id = id;
         this.nome = nome;
         this.votos = 0;
-    }   
-    
+    }
+
+    public Candidato(int id, String nome, int votos, String hash) {
+        super(id, nome);
+        this.id = id;
+        this.nome = nome;
+        this.votos = 0;
+        this.hash = hash;
+    }
+
     public int getId() {
         return id;
     }
@@ -53,14 +69,22 @@ public class Candidato extends Participantes {
         this.votos = votos;
     }
 
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
     @Override
     public void adicionarVoto() {
-       votos++;
+        votos++;
     }
 
     @Override
     public String toString() {
         return "Candidato{" + "id=" + id + ", nome=" + nome + ", votos=" + votos + '}';
     }
-    
+
 }

@@ -9,6 +9,8 @@ import Controller.LoadList;
 import Controller.Manager;
 import Controller.SalvarListas;
 import Controller.SaveList;
+import Controller.ValidarHash;
+import Controller.ValidateHash;
 import Model.Candidato;
 import Model.Eleitor;
 import View.TelaMenu;
@@ -20,12 +22,14 @@ public class App {
         LoadList carregar = new CarregarListas();
         List<Candidato> candidatos = carregar.carregarTxtCandidatos();
         List<Eleitor> eleitores = carregar.carregarTxtEleitores();
-       
+        ValidateHash validarHash = new ValidarHash(carregar);
         Autenticacao auth = new Autenticacao(eleitores);
-        Manager manager = new Manager(candidatos, eleitores, auth);
+        Manager manager = new Manager(candidatos, eleitores, auth, carregar);
         SaveList savelist = new SalvarListas(eleitores, candidatos);
         
-        TelaMenu telaMenu = new TelaMenu(manager, savelist);
+        
+        
+        TelaMenu telaMenu = new TelaMenu(manager, savelist, validarHash);
         telaMenu.setVisible(true);
        
         

@@ -7,17 +7,32 @@ package Controller;
 import Model.Candidato;
 import Model.Eleitor;
 import java.util.List;
-import Controller.Autenticacao;
 import Controller.Auth;
- 
- /*
+import java.util.HashMap;
+import java.util.Map;
+
+/*
  * @author letic
  */
-public class Manager {
+public class Manager implements IManager{
+
     private List<Candidato> candidatos;
     private List<Eleitor> eleitores;
     private Auth auth;
-    
+    private LoadList load;
+
+    public Manager(
+            List<Candidato> candidatos,
+            List<Eleitor> eleitores,
+            Auth auth,
+            LoadList load
+    ) {
+        this.candidatos = candidatos;
+        this.eleitores = eleitores;
+        this.auth = auth;
+        this.load = load;
+    }
+
     public Manager(
             List<Candidato> candidatos,
             List<Eleitor> eleitores,
@@ -28,35 +43,57 @@ public class Manager {
         this.auth = auth;
     }
 
-    public boolean isValid(String nome, String user){
+    public boolean isValid(String nome, String user) {
         return this.auth.autenticar(nome, user);
     }
 
-    public List<Candidato> getCandidato(){
+    public List<Candidato> getCandidato() {
         return this.candidatos;
     }
-    
-    public Candidato getVencedor(){
-        Candidato candidatoMaisVotado = new Candidato(0, "");
-        int maiorQuantidadeVotos = 0;
+
+    public Candidato getVencedor() {
 
         // Itera sobre a lista de candidatos
-        for (Candidato candidato : candidatos) {
-            int quantidadeVotos = candidato.getVotos();
+        List<Eleitor> votos = this.load.carregarTxtVotos();
 
-            // Verifica se a quantidade de votos do candidato atual é maior que a maior quantidade de votos encontrada até agora
-            if (quantidadeVotos > maiorQuantidadeVotos) {
-                maiorQuantidadeVotos = quantidadeVotos;
-                candidatoMaisVotado.setId(candidato.getId());
-                candidatoMaisVotado.setNome(candidato.getNome());
-                candidatoMaisVotado.setVotos(candidato.getVotos());
+        Map<String, Integer> candidatos = new HashMap<>();
+
+        for (Eleitor e : votos) {
+            var candidato = e.getIdCandidato();
+            if (candidato == 1) {
+                candidatos.put("Kimetsu no Yaba", candidatos.getOrDefault("Kimetsu no Yaba", 0) + 1);
+                continue;
+            }
+            if (candidato == 2) {
+                candidatos.put("Shingeki no Kyojin", candidatos.getOrDefault("Shingeki no Kyojin", 0) + 1);
+                continue;
+            }
+            if (candidato == 3) {
+                candidatos.put("Dragon Ball Z", candidatos.getOrDefault("Dragon Ball Z", 0) + 1);
+                continue;
+            }
+            if (candidato == 4) {
+                candidatos.put("One Piece", candidatos.getOrDefault("One Piece", 0) + 1);
             }
         }
-        return candidatoMaisVotado;
+        int maiorVotos = Integer.MIN_VALUE;
+        String candidatoMaisVotado = "Vencedor";
+
+        for (Map.Entry<String, Integer> entry : candidatos.entrySet()) {
+            String candidato = entry.getKey();
+            int votosVencedor = entry.getValue();
+
+            if (votosVencedor > maiorVotos) {
+                candidatoMaisVotado = candidato;
+                maiorVotos = votosVencedor;
+            }
+        }
+
+        return new Candidato(0, candidatoMaisVotado, maiorVotos);
     }
-    
-    public Eleitor lastEleitor(){
-        int i = this.eleitores.size()-1;
+
+    public Eleitor lastEleitor() {
+        int i = this.eleitores.size() - 1;
         return this.eleitores.get(i);
     }
 }

@@ -63,7 +63,7 @@ public class SalvarListas implements SaveList {
            
             for (Candidato c : this.candidatos){
                 String hash = null;
-                String txt = c.getId()+","+c.getNome()+","+c.getVotos();
+                String txt = c.getId()+","+c.getNome();
                 try {
                     hash = HashString.generateHash(txt);
                 } catch (NoSuchAlgorithmException ex) {

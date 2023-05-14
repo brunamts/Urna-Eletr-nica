@@ -6,11 +6,12 @@ package View;
 
 import Controller.Manager;
 import Controller.SaveList;
-import Model.Candidato;
-import Model.Eleitor;
+import Controller.ValidateHash;
+import Exceptions.Fraudado;
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,17 +21,37 @@ import javax.swing.JOptionPane;
 public class TelaMenu extends javax.swing.JFrame {
 
     private SaveList savelist;
-    
-    public TelaMenu(Manager manager) {       
+    private ValidateHash validarHash;
+
+    public TelaMenu(Manager manager) {
         this.manager = manager;
         initComponents();
     }
-    public TelaMenu(Manager manager, SaveList savelist) {       
+
+    public TelaMenu(Manager manager, SaveList savelist) {
         this.manager = manager;
         this.savelist = savelist;
         initComponents();
     }
-   
+
+    public TelaMenu(Manager manager, SaveList savelist, ValidateHash validarHash) {
+        this.manager = manager;
+        this.savelist = savelist;
+        this.validarHash = validarHash;
+        initComponents();
+        try {
+            this.validarHash.validarTxtArquivos();
+            this.validarHash.validarTxtCandidatos();
+            this.validarHash.validarTxtEleitores();
+            this.validarHash.validarTxtVotos();
+        } catch (Fraudado ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            this.botaoVotar.setEnabled(false);
+        } catch (IOException ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,6 +102,7 @@ public class TelaMenu extends javax.swing.JFrame {
         botaoResultado.setBackground(new java.awt.Color(28, 2, 55));
         botaoResultado.setForeground(new java.awt.Color(255, 255, 255));
         botaoResultado.setText("Mostrar Resultado");
+        botaoResultado.setEnabled(false);
         botaoResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoResultadoActionPerformed(evt);
@@ -98,7 +120,7 @@ public class TelaMenu extends javax.swing.JFrame {
                     .addComponent(botaoVotar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoResultado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +164,8 @@ public class TelaMenu extends javax.swing.JFrame {
         this.savelist.subirTxtEleitores();
         this.savelist.subirTxtVotos();
         this.savelist.subirTxtArquivos();
+        this.botaoResultado.setEnabled(true);
+        
     }//GEN-LAST:event_botaoFinalizarActionPerformed
 
     private void botaoResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoResultadoActionPerformed
@@ -153,7 +177,6 @@ public class TelaMenu extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoFinalizar;
