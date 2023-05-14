@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
-package Controller;
 
+
+import Controller.Autenticacao;
 import Model.Eleitor;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +14,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.DisplayName;
 
 /**
  *
  * @author letic
  */
 public class AutenticacaoTest {
-    
-    public AutenticacaoTest() {
-    }
     
     @BeforeAll
     public static void setUpClass() {
@@ -42,7 +41,7 @@ public class AutenticacaoTest {
     /**
      * Test of autenticar method, of class Autenticacao.
      */
-  @Test
+    @Test
     public void testAutenticar() {
         List<Eleitor> eleitores;
         eleitores = new ArrayList<>();
@@ -52,8 +51,8 @@ public class AutenticacaoTest {
         String user = "anderson123";
         boolean resultado = autenticacao.autenticar(nome, user);
 
-        assertEquals(true, resultado);
-        assertEquals(true, autenticacao.validar(nome, user));
+        assertTrue(resultado);
+        assertTrue(autenticacao.validar(nome, user));
     }
 
     /**
